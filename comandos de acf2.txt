@@ -1,0 +1,33 @@
+
+chequear en acf2 user omvs
+
+tso acf
+set lid
+list yyy2c22
+
+para salir quit
+
+
+ YYY2C22              NINTIS057O2O3SDYYY2C22  CORDERO, GABRIEL S               
+                      COMP(NI) LOC-OPER(057) ORG1(IS) ORG2(O2) ORG3(O3)        
+                      ORG4(SD) SUB(NT)                                         
+ PRIVILEGES           CICS ETFAUID() F$REUID() TSO                             
+ ACCESS               ACC-CNT(148) ACC-DATE(01/05/23) ACC-SRCE(TER07500)       
+                      ACC-TIME(16:03)                                          
+ PASSWORD             KERB-VIO(0) KERBCURV() MAXDAYS(60)                       
+                      PSWA1TOD(00/00/00-00:00) PSWA2TOD(00/00/00-00:00)        
+                      PSWD-DAT(00/00/00) PSWD-INV(0) PSWD-SRC(TER07500)        
+                      PSWD-TIM(10:44) PSWD-TOD(12/05/22-10:44) PSWD-VIO(0)     
+                      PSWDCVIO(20) PWP-DATE(00/00/00) PWP-VIO(0)               
+ TSO                  ALLCMDS CHAR(BS) CMD-LONG DFT-DEST(LOCAL)                
+                      DFT-PFX(YYY2C22) INTERCOM JCL LGN-PERF LGN-PROC LGN-SIZE 
+                      LINE(ATTN) MAIL MODE NOTICES PROMPT TIME-LIM             
+                      TSOACCT(ACCOUNT) TSOFSCRN TSOPROC(IKJTSOWK) TSORGN(2,048)
+                      TSOUNIT(SYSALLDA) WTP                                    
+ STATISTICS           CRE-TOD(10/23/19-13:01) UPD-TOD(01/05/23-16:03)          
+ RESTRICTIONS         EXTRGN(32) PREFIX(YYY2C22) SUPLVL(PXXDXXSXXRXX)          
+LID                                                                            
+                                                                               
+
+
+

@@ -1,0 +1,19 @@
+comandos de JES NODES
+
+-$DNODE(DAYMVS8)                                           
+ $HASP826 NODE(975)                                        
+ $HASP826 NODE(975)   NAME=DAYMVS8,STATUS=(VIA/LNE46),     
+ $HASP826             TRANSMIT=BOTH,RECEIVE=BOTH,HOLD=NONE 
+
+
+-$DNODE(DAYMVS1)                                            
+ $HASP826 NODE(2) 421                                       
+ $HASP826 NODE(2)     NAME=DAYMVS1,STATUS=(UNCONNECTED),    
+ $HASP826             TRANSMIT=BOTH,RECEIVE=BOTH,HOLD=NONE  
+
+-$DPATH(DAYMVS8)                                                 
+ $HASP231 PATH(DAYMVS8)                                          
+ $HASP231 PATH(DAYMVS8)   STATUS=(THROUGH LNE46),REST=100,       
+ $HASP231                 PATH=(DAYMVS1,RALVM17...LMC1,DAYMVS8)  
+
+

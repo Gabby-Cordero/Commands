@@ -1,0 +1,9 @@
+/f taskname,storage detail
+/f taskname,map
+/f taskname,display class=all
+/f taskname,vshow '*' active
+/f taskname,ntd klstsdlg '*'   
+/f taskname,ntd klsmlev
+/f taskname,flush
+
+

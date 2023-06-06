@@ -1,0 +1,33 @@
+
+IVT5539I ECSA  MAXIMUM =     120M ECSA  CURRENT =    6175K
+IVT5541I ECSA  MAXIMUM USED =    6175K SINCE LAST DISPLAY CSM
+IVT5594I ECSA  MAXIMUM USED =   14744K SINCE IPL
+IVT5604I HVCOMM MAXIMUM =    2000M HVCOMM CURRENT =      51M
+IVT5541I HVCOMM MAXIMUM USED =      51M SINCE LAST DISPLAY CSM
+IVT5594I HVCOMM MAXIMUM USED =      52M SINCE IPL
+
+
+Just to clarify: these messages are a part of the output from a DISPLAY NET,CSM command, 
+they are not issued as a result of any error event.
+
+
+ECSA MAXIMUM is the current limit being enforced for CSM's usage of ECSA storage.  
+typically this is set in the IVTPRM00 PARMLIB member, but can be updated by a MODIFY vtamname,CSM command.
+
+
+ECSA CURRENT is the amount of ECSA storage allocated by CSM at the time the DISPLAT NET,CSM command was issued.
+
+
+ECSA  MAXIMUM ... SINCE LAST DISPLAY CSM is the high-water mark of usage during the period between two DISPLAY NET,CSM commands.  Since you (apparently) have automation set to issue this every 15 minutes, it will be for the previous 15 minute period.  However anyone entering this command manually will reset this, so it may not always be for the full 15 minute period on your system.
+
+
+ECSA  MAXIMUM ... SINCE IPL is the high-water mark of usage while the system has been active.
+
+
+The HVCOMM fields have a similar interpretation, except that these are for the storage areas allocated from common areas above the bar (64 bit addresses).  This is separate from the conventional ECSA (31 bit addresses).  I'm not aware of any system wide limits on HVCOMM usage, other than AUX storage capacity.
+
+
+BTW:  Your performance team surely has some method of running SMF reports.  If not, then you should discuss the need to even collect that data (there is system overhead associated with that processing).
+
+
+

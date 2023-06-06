@@ -1,0 +1,1076 @@
+
+
+passive data ports
+
+PASV port = (p1 * 256) + p2.
+
+desde SYSC
+
+ssh-keyscan -t rsa sft-sa-310.americas.bg.corpintra.net >> /etc/gabb
+
+luego
+
+cat /etc/gabb >> /u/BIGTRUCK/.ssh/known_hosts
+
+-----------
+
+
+
+d tcpip,,n,srcip
+
+sh cp /syslogd/perr-gab "//'SOFTGC1.A2222'"
+
+sh cp "//'SOFTGC1.POLICY'" /etc/pagent/policy
+
+--
+
+
+D NET,DIRECTRY,ID=EFXSVC01.M10RED,SCOPE=NSEARCH 
+
+D NET,DIRECTRY,ID=EFXSVC01.EFXS4MSG,SCOPE=NSEARCH
+
+/F VTAM,DIRECTRY,FUNCTION=DELETE,ID=USIBMNR.NRAMVSG 
+
+CAMBIAR NETSERVER 
+
+F VTAM,DIRECTRY,UPDATE,ID=USIBMNR.NRAMVSG,CPNAME=USIBMNR.NRMMVSG,NETSRVR=USIBMNET.ZE001AM1    
+
+en acf2 permiso cssmtp
+
+SET C(GSO)
+INSERT STC.CSSMTP GROUP() LOGONID(TCPIP) STCID(CSSMTP)
+
+equivalente a:
+
+RDEFINE STARTED CSSMTP.* STDADA(USER(TCPIP) GROUP(OMVSGRP))
+SETROPTS RACLIST(STARTED) REFRESH
+
+--------------
+
+
+buscar con asterisco LUs:
+
+/D NET,RSCLIST,ID=ANQ6* 
+
+poner el comando de unix enun file
+
+pasearch -t >/tmp/attls.txt
+
+
+TSO PROFILE   para ver nuestra profile de user
+si quiero sacarle el PREFIX que utiliza cuando alocamos archivos
+TSO PROFILE NOPREFIX
+TSO PROFILE PREFIX(NTWKAGC)   PARA VOLVERLO A ACTIVAR
+
+buscar palabra en cierta columna
+
+f usibmnr 1 7
+
+
+
+To force syslogd or sshd to reread its configuration file and activate any modified parameters
+ without stopping, issue:
+ kill -s SIGHUP PID
+ejemplo    kill -s SIGHUP 67174923
+
+ver cantidad de sockets:
+
+d omvs,pfs
+
+
+F VTAM,DEFAULTS,ID=M03NJE,DLOGMOD= 
+
+F VTAM,TABLE,ID=M03NJE,OPT=ASSOC,NEWTAB=MODTABNR,TYPE=MODETAB,OLDTAB=NJEMODE
+
+F NET,VTAMOPTS,IPADDR=10.25.29.132
+
+
+
+
+tso ld da('sys1.parmlib') all gen
+
+
+tso ping 9.149.87.166 (LENGTH 1472 pmtu yes
+
+
+COMANDO DE UNIX PARA CAMBIAR OWNER Y GROUP ID DE TODOS LOS FILES DE UN DIRECTORIO
+
+sh chown -Rh NTWKAGC:205 /u/ntwkagc/papa/*_
+
+
+
+de JCL:
+
+c 'V' 'Z' 1 1 ALL    cambia la V por la Z en la columna 1 hasta la columna 1
+
+x all     oculta todo
+
+del x all deletea todo lo ocultado
+
+x 'boca' all
+
+desocultar seria
+
+f 'boca' all
+
+borrar lo que no esta oculto
+
+del nx all
+
+
+----------------------
+
+
+allocate dd(systcpt) da(*)
+
+En NAG3
+
+Quiero copiar el contenido del directorio /u/ntwkagc/automount/ en el directorio /u/ntwkagc/abcdef/
+
+tso ftp 127.0.0.1 
+
+cd /u/ntwkagc/abcdef
+
+mput /u/ntwkagc/automount/* 
+
+y doy yes a todos
+
+----------------------------
+
+
+NJE O NODOS EN JES3:
+*i,nje
+*i,nje,n=ccc2
+
+LIMITE DE USUARIOS TSO
+D TS,L
+
+-D NET,APING,ID=IBMIN.USPROXY1,LOGMODE=ÑCONNECT,ITER=20
+
+D NET,APING,ID=USIBMYF1.AMI1FTP1,logmode=Ñbatch,size=8000,iter=5
+*tener en cuenta que este comando va contra otro vtam no contra una lu
+de nvftp por ejemplo
+
+DE IDS:
+
+d tcpip,,n,ids
+
+d tcpip,,n,ids,protocol=tcp o udp 
+
+D TCPIP,TN3270,T,CONN,PORT=23
+
+D tcpip,,netstat,conn,appldata,appld=EZAFTP*,format=long
+
+el valor APPLICATION DATA:  EZAFTP0C C NTWKAGC PT123D D003D 
+ver el PT123D con manual IP Programmer
+
+PARA TELNET:
+
+-D tcpip,,netstat,conn,appldata,appld=ezbtn*,format=long  
+
+APPLICATION DATA:  EZBTNSRV V34I5551 TPX34    ET ST13S  
+
+E=TN3270
+T=Terminal
+Espacio
+S=TLS (NO ATTLS)
+T1=TLSV1
+3S=Es el cipher EN ESTE CASO SSL_3DES_SHA
+EN manual IP programmer "Application data format for Telnet"
+
+SSL_RC4_SHA                     4S                                05
+  SSL_RC4_MD5                     4M                                04
+  SSL_AES_256_SHA                 A2                                35
+  SSL_AES_128_SHA                 A1                                2F
+  SSL_3DES_SHA                    3S                                0A
+  SSL_DES_SHA                     DS                                09
+  SSL_RC4_MD5_EX                  4E                                03
+  SSL_RC2_MD5_EX                  2E                                06
+  SSL_NULL_SHA                    NS                                02
+  SSL_NULL_MD5                    NM                                01
+  SSL_NULL_Null                   NN                                00
+
+
+
+
+
+RESETEAR USUARIO EN ACF2
+
+F ACF2,RESET(MISZG1C)
+
+TSO ACF
+
+Luego L MISZG1C
+
+PARAR PORT 992 (RECORDAR QUE TE TIRA AFUERA SI ENTRASTE POR ESE PORT)
+
+ro mm,V TCPIP,TELNET,STOP,PORT=992
+ro mm,V TCPIP,TELNET,O,DSN=TCPIP.PARMS(TELNMM)
+
+
+
+
+DELETEAR UNA INTERFAZ PARA PONER PARAMETRO EN OSA
+
+-	Modificar en la profile y agregar o cambiar el parámetro
+-	Genero un member en alguna librería con lo siguiente:
+INTERFACE GETH2            
+DELETE
+-	V tcpip,tcpip,stop,geth2    stopeo la interface
+-	v tcpip,tcpip,o,ntwkagc.tcpip(delee)    obey al member
+-	v tcpip,tcpip,start,geth2    starteo interface
+-	v tcpip,tcpip,o,tcpip.nag3.tcpip     obey a la profile
+
+
+D TCPIP,tn3270,TELNET,conn,lun=p01tc006
+-D TCPIP,TN3270,T,PROF,PORT=2023,DETail
+
+EKM
+
+D IOS,EKM
+
+ACTIVAR LA CONEXION
+
+D IOS,EKM,VERIFY=PRIMARY
+
+Y deberiamos ver la conexion ESTABLISH
+
+
+
+vemos el mtu y otra info de lo que tenemos en ruteo estatico
+
+D TCPIP,TCPIP,NETSTAT,ROUTE,DETAIL
+
+si deseamos a una especifica ip
+
+d TCPIP,TCPIP,NETSTAT,ROUTE,DETAIL,IPADDR=xxxxxx
+
+
+
+D net,topo,orig=sscp06,tgn=21
+
+d net,topo,list=vn
+
+D net,topo,orig=cdq6,dest=devl
+
+id -u ntwkagc
+
+whoami
+
+
+VER QUIEN TIENE UN FILE
+
+d grs,res=(SYSDSN,'MEASTSN.SOUTSTOR.FLAG')
+
+
+COMANDO VM:
+
+sf / npchiapu at ibmar
+
+le envio el FTPCHK a Nicolas Chiaradia
+
+-------------------
+
+locale charmap   ver codepage
+
+ACTIVAR CPNAME
+
+v net,act,id=USIBMK4.K04CDRM,idtype=cp
+
+
+d net,ee,cpname=USIBMP0.R0DCDRM
+
+
+/D NET,EEDIAG,TEST,IP=(9.63.66.210,9.63.66.208),LIST=summary
+
+D NET,EEDIAG,TEST=YES,ID=SWIP2A1,LIST=DETAIL
+
+
+tso dig mx oop.pok.relay.ibm.com +short | sort
+
+
+Pinging loopback is essentially used to verify the installation of TCP/IP in the
+z/OS Communications Server environment.
+
+Ping a home address to verify the information from the Netstat HOME/-h
+command.
+
+ping 9.17.129.85 (intf eth1
+
+tso ping 167.64.225.72 (srcip 10.25.29.132   
+
+
+
+
+
+ping -i eth1 remota red
+
+ping red (verbose
+
+ping tso ping 9.17.129.85 (verbose length 1000
+
+d omvs,o
+
+d omvs,f los montados
+
+d omvs,mf errores de montaje
+
+v tcpip,,drop,00389A1D   bajar connid
+------------------
+
+appc:
+
+ D APPC,LU,ALL
+
+---
+
+
+hsm
+
+f hsmtso,q req
+
+hsmtso es el nombre del hsm
+
+-F HSMTSO,Q W  
+
+CPSVCMG
+SNASVCMG
+-----------------
+
+SMF SID ID es con:
+
+d smf,o
+
+
+-------------------------------------------------------------------------------------
+
+-D NET,COS,TYPE=APPN      --------->  ver que cosappn esta usando
+
+D NET,TOPO,ORIG=R0ECDRM,DEST=USIBMP0.MGY04MG,APPNCOS=ÑBATCH   peso de link
+
+D net,topo,orig=sfcdrm08,tgn=22
+
+-D NET,TOPO,ID=xxxxxxx,APPNCOS=yyyyyyyy     peso del nodo
+
+D NET,TOPO,ID=NRMMVSF,LIST=ADJ,APPNCOS=ÑINTER
+                                                
+
+d net,adjclust,e     --------------> border nodes dinamicos definidos y definidos en adjclust
+
+d a,csf               -------------> si tiene icsf
+
+/f pagent,update  --->  revisa si hubo cambios en las politicas
+
+/f iked,display   ----> display iked en ulog
+
+/f iked,refresh   ----> si hice cambios en el iked.conf y quiero que los tome
+
+ipsec -k display | grep -P 9 '9.185.63.221'  
+
+ipsec -t 9.56.214.17 9.63.66.215 udp 12000 12000 out  ---> puerto orgine y destino de salida, imprime que regla tiene
+ipsec -t 9.63.66.57 9.57.198.99 udp 500 500 out
+
+tso ping 9.212.136.37 (count 5 length 1000   ---->  5 pingues y de tamaño bytes 1000
+
+tso ping 9.212.136.37 (verbose count 5 length 1000  ---> Lo mismo que arriba pero con mas info
+
+ipsec -k display
+
+ipsec -y display
+ ipsec -f display
+
+ipsec -f default   vuelve a reglas default
+
+ipsec -f reload  recargar reglas
+
+ipsec -k deactivate -a all
+
+ipsec -f display -c profile
+
+ipsec -f display -c policy
+
+ipsec -k deactivate -a k43
+
+ipsec -y display | grep '9.149.94.2'
+
+
+
+muchas veces si da este error: 
+
+EZD0888I IKE daemon could not process the request - stack INET is unknown
+
+ipsec -k deactivate -p tcpip -a kxxx
+
+
+CS V2R2 ipsec  Stack Name: TCPIP  Wed Jun  6 14:42:26 2018           
+Primary:  IKE tunnel      Function: Deactivate                       
+                                                                     
+Tunnel ID    Status                                                  
+K43          Deactivating         
+
+
+pasearch -v a Displays all IPSec policy
+pasearch -v f Displays IpFilterPolicy
+pasearch -v k Displays KeyExchangePolicy
+pasearch -v l Displays LocalDynVpnPolicy
+
+oshell ipsec -k display    DESDE TSO
+
+
+-----
+
+F PAGENT,DEBUG,LEVEL=255
+
+CAMBIAR LOG PAGENT:
+
+-F PAGENT,LOGLEVEL,LEVEL=16                       
+           
+ EZZ8443I PAGENT MODIFY COMMAND ACCEPTED                     
+
+-F PAGENT,QUERY                                              
+
+ EZZ8444I PAGENT LOG LEVEL 16 DEBUG LEVEL 1 TRACE LEVEL 0    
+
+pasearch -t | grep "55"
+
+f FTPD1,DEBUG=(ALL,IPADDR(161.222.190.72)) 
+/f ftpd1,debug=all   ----> activar debug
+/f ftpd1,debug=none  ---> parar debug
+
+DEBUG de TELNET es en el PROFILE DE TELNET y hacemos obey
+
+-D TCPIP,TN3270,CONN,CONN=8C  ----> display del connid
+
+d net,topo,orig=p05cdrm,tgn=6,APPNCOS=ÑBATCH
+
+D NET,TOPO,LIST=TDUINFO
+
+info de tdus
+
+-RO VSK,D NET,TOPO,ORIG=NRMVSK,DEST=USIBMNR.NRMMVSD,APPNCOS=ÑBATCH  
+
+-RO VSK,D NET,TOPO,LIST=NN
+
+-RO VSK,D NET,TOPO,ID=NRMVSK,LIST=ADJ 
+
+-RO VSK,D NET,TOPO,LIST=SUMMARY 
+
+borrar entrada topo
+
+f vtam,topo,function=delete,orig=USIBMP0.P0NCDRM,dest=EB0ZNET0.EBPH0103,tgn=8,f
+
+f vtam,topo,function=delete,orig=NRMVS6,dest=USIBMNR.NRMCMC2,tgn=6,f
+
+desde syn a cmc1
+f vtam,topo,orig=p0ncdrm,dest=usibmnr.nrmcmc1,tgn=7,function=quiesce                                                          
+f vtam,topo,orig=nrmvs6,dest=usibmnr.nrmcmc1,tgn=6,function=quiesce
+
+PONER EN QUIESCE LAS VRN Y LOCAL:
+
+F VTAM,TOPO,FUNCTION=QUIESCE,ORIG=K11CDRM,DEST=IBMGVRN.INTERNAL,TGN=21
+
+F VTAM,TOPO,FUNCTION=QUIESCE,ORIG=K11CDRM,DEST=USIBMP0.IPNETWRK,TGN=21
+
+
+
+netstat ttls
+
+d tcpip,,n,ttls
+
+
+d tcpip,,n,ttls,conn=000136EB,detail
+
+Question
+
+After establishing an AT-TLS encrypted TCP connection, we want to know what cipher is used.
+Answer
+
+    Use NETSTAT CONN to find the connection ID under the 'CONN' field.
+    Then issue either one of the following commands to verify what cipher is being used for this connection ID (xxxx):
+        NETSTAT TTLS CONN xxxx
+        NETSTAT TTLS CONN xxxx DETAIL
+
+The Cipher field in the ConnID section of the generated report gives the cipher currently in use
+ for encryption and decryption of data for the connection, as shown in the example below,
+ from the IP System Administrator's Commands book::
+
+     ConnID: 0000001B                                                                
+     JobName:      THISJOB
+     LocalSocket:  9.67.103.6..72                                                
+     RemoteSocket: 9.27.11.182..4665                                              
+     SecLevel:     TLS Version 1                                                  
+     Cipher:       0A  TLS_RSA_WITH_3DES_EDE_CBC_SHA                              
+     CertUserID:   THISUSER                                                        
+     MapType:      Primary                                                        
+     FIPS140:      Off   
+
+-D TCPIP,TN3270,CONN,CONN=000016D2,DETAIL   
+-D TCPIP,TN3270,CONN,CONN=00108477,DETAIL
+00108477
+ D NET,CLSTRS   los TRLs y PUs activas y sus majnodes
+
+-------------------------------
+
+/$dline(30)
+
+$HASP880 LINE30                                                         
+$HASP880 LINE30     UNIT=SNA,STATUS=ACTIVE/SBRYSNA,RESTART=(NO),        
+$HASP880            COMPRESS=YES,CONNECT=(DEFAULT),DISCON=NO,           
+$HASP880            LOG=NO,PASSWORD=(NOTSET),REST=200,NODE=0,           
+$HASP880            RMTSHARE=N/A,SESSIONS=(MBZ20RSC/INACTIVE),          
+$HASP880            TRACEIO=(NO),JRNUM=DEFAULT,JTNUM=DEFAULT,           
+$HASP880            SRNUM=DEFAULT,STNUM=DEFAULT                         
+
+
+
+
+para deletear vipa 
+
+INTERFACE VIPA DELETE
+
+
+ver las interfaces que no son ospf
+
+f omproute,GENERIC,LIST,ALL
+
+
+
+tso testsite ---> ver la hostlocal
+
+ping desde el unix ves la ip de la etc/hosts
+
+-tso nslookup 9.0.6.40 9.0.6.1    ----->  el segundo IP es el dns que queremos que responda
+
+
+-	D TCPIP,,N,RESCACHE,DETAIL,IPADDR=a.b.c.d        Displays the cache table entries related to a specific IP address
+-	D TCPIP,,N,RESCACHE,DETAIL,HOSTNAME=dnsname      Displays the cache table entries related to a specific DNS name
+-	F RESOLVER,FLUSH,ALL                             Flushes/Clears the cache  
+
+
+d tcpip,,n,resc,detail
+
+-f resolver,refresh    ----->   refresca la tabla RESOLVER y TCPDATA
+
+
+
+FTP FORZAR QUE USE UNA ESPECIFICA IP
+
+
+tso ftp 9.23.122.101 -s 9.17.89.10
+
+
+
+---------------  TESTEAR PARAMETRO EN FTP   ----
+
+ftp nag3.pok.ibm.com
+ntwkagc
+password
+
+
+
+ftp> quote site filetype=jes
+200 SITE command was accepted
+ftp> quote stat
+
+
+211-JESINTERFACELEVEL is 2
+
+--------------------------------------------------------------
+
+
+CORRER JCL DESDE AFUERA ADENTRO DEL MVS
+
+una vez dentro del FTP
+
+ftp>quote site filetype=jes
+
+ftp>put c:\jcl.txt ----> este es un job para ejecutar en el MVS
+
+ftp>dir
+
+NTWKAGCN  JOB07717  NTWKAGC   OUTPUT   A    RC=0000   17 Spool files
+
+
+-------------------------
+
+
+SNMP
+
+Sobre el netview
+
+ipman ---> recursos monitoreados por el netview
+
+snmp -c j0s9m2ap walk ifnum
+snmp -c j0s9m2ap walk iftable
+
+
+1.3.6.1.2.1.2.2.1.1.1 = 1                                     
+1.3.6.1.2.1.2.2.1.1.2 = 2                                     
+1.3.6.1.2.1.2.2.1.1.3 = 3                                     
+1.3.6.1.2.1.2.2.1.1.4 = 4                                     
+1.3.6.1.2.1.2.2.1.1.5 = 5                                     
+1.3.6.1.2.1.2.2.1.1.6 = 6                                     
+1.3.6.1.2.1.2.2.1.1.7 = 7                                     
+1.3.6.1.2.1.2.2.1.1.8 = 8                                     
+1.3.6.1.2.1.2.2.1.1.9 = 9                                     
+1.3.6.1.2.1.2.2.1.1.10 = 10                                   
+1.3.6.1.2.1.2.2.1.2.1 = Loopback Device                       
+1.3.6.1.2.1.2.2.1.2.2 = Loopback                              
+1.3.6.1.2.1.2.2.1.2.3 = Virtual IP Address Device             
+1.3.6.1.2.1.2.2.1.2.4 = Virtual IP Address Link               
+1.3.6.1.2.1.2.2.1.2.5 = OSA-Express QDIO Port                 
+1.3.6.1.2.1.2.2.1.2.6 = IP Assist QDIO Ethernet               
+1.3.6.1.2.1.2.2.1.2.7 = OSA-Express QDIO Port                 
+1.3.6.1.2.1.2.2.1.2.8 = IP Assist QDIO Ethernet               
+
+
+--------------------------
+
+
+-D TCPIP,,OMP,RTTABLE,DEST=9.63.66.68 
+
+d tcpip,,omp,rttable,dest=9.149.87.166
+                   
+ EZZ7874I ROUTE EXPANSION 565                            
+ DESTINATION:    9.63.66.68                              
+ MASK:           255.255.255.255                         
+ ROUTE TYPE:     SPF                                     
+ DISTANCE:       2                                       
+ AGE:            796941                                  
+ NEXT HOP(S):    9.63.64.68        (GETH1)               
+                 9.63.65.68        (GETH2)               
+
+
+
+-D TCPIP,,OMP,RTTABLE,DEST=9.63.71.1              
+ EZZ7874I ROUTE EXPANSION 760                     
+ DESTINATION:    9.63.71.1                        
+ MASK:           255.255.255.255                  
+ ROUTE TYPE:     SPF                              
+ DISTANCE:       1001                             
+ AGE:            1091954                          
+ NEXT HOP(S):    9.63.64.22        (GETH1)        
+                 9.63.65.22        (GETH2)        
+
+-D TCPIP,,OMP,OSPF,INTERFACE    
+
+-D TCPIP,,OMP,OSPF,INTERFACE                                           
+ EZZ7849I INTERFACES 289                                               
+ IFC ADDRESS     PHYS         ASSOC. AREA     TYPE   STATE  ÑNBRS  ÑADJ
+ 167.146.10.1    EZAXCFP5     0.0.0.160       P-2-MP   16      1      1
+ 167.146.10.1    EZAXCFP4     0.0.0.160       P-2-MP   16      1      1
+ 167.146.10.1    EZAXCFP2     0.0.0.160       P-2-MP   16      1      1
+ 167.146.8.45    VIPLA792082D 0.0.0.160       VIPA    N/A    N/A    N/A
+ 167.146.10.1    EZAXCFP3     0.0.0.160       P-2-MP   16      1      1
+ 167.146.10.1    IQDIOLNKA79* 0.0.0.160       BRDCST    1      0      0
+ 167.146.10.1    EZASAMEMVS   0.0.0.160       P-2-MP   16      0      0
+ 167.146.8.28    VIPLA792081C 0.0.0.160       VIPA    N/A    N/A    N/A
+ 167.146.8.27    VIPLA792081B 0.0.0.160       VIPA    N/A    N/A    N/A
+ 167.146.8.25    VIPLA7920819 0.0.0.160       VIPA    N/A    N/A    N/A
+ 167.146.8.24    VIPLA7920818 0.0.0.160       VIPA    N/A    N/A    N/A
+ 167.146.10.27   VIPAEE       0.0.0.160       VIPA    N/A    N/A    N/A
+ 172.27.232.14   OSA4         0.0.0.160       BRDCST   32      6      2
+ 172.27.232.13   OSA3         0.0.0.160       BRDCST    2      0      0
+ 172.27.232.12   OSA2         0.0.0.160       BRDCST    2      0      0
+ 172.27.232.11   OSA1         0.0.0.160       BRDCST    2      0      0
+
+
+
+-d tcpip,,omp,ospf,list,all
+
+ver el advertise
+
+F OMPROUTE,RECONFIG                                                    
+EZZ7866I OMPROUTE MODIFY COMMAND ACCEPTED                              
+EZZ7821I IGNORING DUPLICATE OSPF_INTERFACE STATEMENT FOR 9.56.214.178  
+EZZ7821I IGNORING DUPLICATE OSPF_INTERFACE STATEMENT FOR 9.56.211.123  
+EZZ7821I IGNORING DUPLICATE OSPF_INTERFACE STATEMENT FOR 9.56.219.101  
+
+
+D TCPIP,,OSAINFO,INTFN=GETH1 
+
+- ver cosas de la osa
+
+----------------------------
+
+bpxmtext reason code   ver el reason
+
+/d a,syslogd
+
+/d omvs,a=xxxx ---> address space que da el anterior comando
+
+/f bpxoinit,term=xxxxx ----> pid que da el anterior comando
+
+Con esto bajamos el SYSLOGD
+
+Para levantarlo, si no levanta del AUTOLOG, levanta del /etc/rc y de ahi podemos ver el 
+comando que ejecutar
+
+
+desde SDSF:
+
+F SYSLOGD,RESTART    para restartear
+
+
+--------------------------------
+
+A medida que vayan dejando los FICON activos, el paso siguiente que deben realizar es cambiarle el Transmition Group a 
+la PUs de los ESCONs a X.25.
+Esto se realiza con el siguiente comando:
+
+F VTAM,TGP,TGPNAME=X25,ID=SDVM6PU
+
+INACTIVAR SESION
+
+v net,term,sid=C2DFC0EFCC3F6029
+
+-------------------------------
+
+deletear un recurso ejemplo de CDRSC
+
+/V NET,INACT,ID=resource,DELETE=YES
+
+-------------------------------
+
+-D TCPIP,,N,ROUTE,RSTAT      ---> rutas estaticas
+                       
+ EZZ2500I NETSTAT CS V2R1 TCPIP 637                 
+ DESTINATION        GATEWAY         INTERFACE       
+ DEFAULT            9.56.211.3      ETH1            
+ DEFAULT            9.56.219.3      ETH3            
+ DEFAULT            9.56.211.4      ETH1            
+ DEFAULT            9.56.219.4      ETH3            
+ 4 OF 4 RECORDS DISPLAYED                           
+
+
+----------------------------------------------------
+
+OMVS UNIX
+
+saber mi HOME
+
+echo $HOME
+
+whoami
+
+id (con esto veo mi uid ymi gid)
+
+wc para saber lineas/palabras/bytes
+
+ls -la | grep rc
+
+cp /syslogd/aaaa.log "//'SOFTGC1.REPORT'"
+
+cp /etc/pagent/policy-tls-sysm "//'NTWKAGC.SINIMS'"
+
+ver parametros ssh
+sh /usr/sbin/sshd -T | grep "max"
+
+ver algoritmos en ssh ciphers
+
+$ ssh 127.0.0.1 -Q cipher   
+           
+3des-cbc                               
+aes128-cbc                             
+aes192-cbc                             
+aes256-cbc                             
+rijndael-cbc@lysator.liu.se            
+aes128-ctr                             
+aes192-ctr                             
+aes256-ctr                             
+aes128-gcm@openssh.com                 
+aes256-gcm@openssh.com                 
+chacha20-poly1305@openssh.com          
+$                                      
+
+$ ssh 127.0.0.1 -Q mac
+               
+hmac-sha1                            
+hmac-sha1-96                         
+hmac-sha2-256                        
+hmac-sha2-512                        
+hmac-md5                             
+hmac-md5-96                          
+umac-64@openssh.com                  
+umac-128@openssh.com                 
+hmac-sha1-etm@openssh.com            
+hmac-sha1-96-etm@openssh.com         
+hmac-sha2-256-etm@openssh.com        
+hmac-sha2-512-etm@openssh.com        
+hmac-md5-etm@openssh.com             
+hmac-md5-96-etm@openssh.com          
+umac-64-etm@openssh.com              
+umac-128-etm@openssh.com             
+$                                    
+
+
+traer una llave publica de un servidor sin conectarse
+
+ssh-keyscan -t rsa fws-si-qa.farmersinsurance.com >>$HOME/farmqi_id_rsa.pub
+
+ssh -Q key
+ssh -Q kex
+ssh -Q mac
+
+
+
+alias ver="ls"
+
+sysid=nag2 en /etc/profile
+
+du /u/ntwkagc
+
+df /var/logs/20141222/syslog.log
+
+ponerse en su
+
+find / -name "pe_CEEBXITA.o" 
+
+find / -name "AOPLPD"
+find / -name "ssh_prng_cmds"
+
+df -Pkv /u 
+
+
+----------------------------------------------------
+
+/d net,tgps
+
+                                              nag1        nody que esta por global
+-d net,eediag,test=yes,list=detail,ipaddr=(9.63.66.188,129.41.43.27)
+
+129.39.229.197   
+ 32.91.243.113   
+
+32.91.243.113
+
+F VTAM,TGP,TGPNAME=VRN,ID=USIBMP0.P08CDRM,TGN=6   para un EE 
+
+D NET,EEDIAG,REXMIT=1,Ip=9.63.66.210,list=summary 
+
+averiguar la ip de un EE y la PU
+
+-D NET,EE,CPNAME=EB0ZNET0.NOGSCDRM  
+
+
+F VTAM,TGP,TGPNAME=TOKNRING,ID=USIBMP0.P08CDRM,TGN=6
+
+/F VTAM,TGP,TGPNAME=X25,ID=puname
+
+/f vtam,rtp,id=CNR01720
+
+/v net,inact,id=cnr14a85,f
+
+/d net,e,id=CNR009DB,hprdiag=yes,clear=all   deletea contadores
+
+/d net,e,id=xxxxxxx,hprdiag=yes
+
+/d net,rtps,cpname=xxxxx.xxxxxxx
+
+/d net,rtps,id=CNR...,test=yes
+
+
+----------------------------------------------------
+
+-D TCPIP,,N,ALL,IPPORT=10.240.5.66+22
+ 
+D TCPIP,,N,ALL,IPPORT=10.240.5.36+52245
+D TCPIP,,N,ALL,IPPORT=9.63.66.141+21 
+
+D TCPIP,,N,ALL,IPPORT=172.25.145.79+34524
+
+/$d proclib
+
+/d t   ----> dia juliano y hora
+
+---------------------------------------------------
+
+DDVIPA VIPA DISTRIBUIDA
+
+/d tcpip,,n,config
+
+DYNAMICXCF: YES                   
+  IPADDR/PREFIXLEN: 192.168.2.2/24
+
+/RO *ALL,D TCPIP,,N,VIPADCFG,DETAIL
+
+ -RO *ALL,D TCPIP,,N,VDPT  
+
+estudiar este comando muestra pesos segun wlm en basewlm (peso por sistema) y server wlm (peso por servicio) 
+tsr al 100 significa que esta para recibir conexiones
+
+/D TCPIP,,N,DEV
+
+Ahí vemos el parámetro de abajo…
+DEVNAME: IUTIQDIO
+Esto nos sirve para buscar el hipersocket, con un trl
+
+/D NET,TRL,TRLE=IUTIQDIO
+
+Nos dira que addresses usa y chipid para utilizar HS.
+
+
+Para desactivar y activar vipa dinamica, dinamicamente.
+
+v tcpip,tcpip1,sysplex,deact,dvipa=9.9.9.9
+v tcpip,tcpip1,sysplex,react,dvipa=9.9.9.9
+
+COMANDOS DE XCF DE DIRECCIONES 
+
+D XCF,PATHIN
+D XCF,PATHOUT
+
+
+-------------------------------------------------------
+
+/$dproclib   cual es la proclib
+
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+ -RO SYD,F SMTP,SMSG,STATS                                  
+  EZA5595I SMSG STATS Output                                
+  Last Up Time:  Sun, 25 Jan 15 00:38:09 EST                
+  Statistics  : 01/30  01/29  01/28  01/27                  
+  From TCP    :    16    16    17    16                     
+  From Spool  :    89    85    80    73                     
+  BSMTP Logs  :     0     0     0     0                     
+  Error Mail  :     2     2     2     2                     
+  To Local    :     1     1     2     1                     
+  To RSCS     :    17    17    17    17                     
+  To TCP      :   487   475   468   455                     
+  Passive Opns:    16    16    17    17                     
+  Active Opens:   159   146   142   134                     
+  --------------------------------                          
+  Highest num queued: 270                                   
+  High reached at: Date: Sun, 25 Jan 15 03:47:27 EST        
+
+
+------------------------------------------------------------------------------
+
+
+
+COMANDOS DE TOPO
+
+IST1301I USIBMNR.NRMMVSD   3        INOP     INTERM      YES   *NA* 
+
+
+
+ -RO VSK,D NET,TOPO,LIST=SUMMARY                                          
+  IST097I DISPLAY ACCEPTED                                                
+  IST350I DISPLAY TYPE = TOPOLOGY                                         
+  IST1306I LAST CHECKPOINT   ADJ  NN   EN   SERVED EN CDSERVR ICN  BN     
+  IST1307I 01/26/15 15:56:59 7    8    3    0         2       0    2      
+  IST1781I INITDB CHECKPOINT DATASET   LAST GARBAGE COLLECTION            
+  IST1785I 11/20/10 15:09:18           01/28/15 00:07:02                  
+  IST314I END                                                             
+
+
+ -RO VSK,D NET,TOPO,ID=NRMVSK,LIST=ADJ                                       
+  IST097I DISPLAY ACCEPTED                                                   
+  IST350I DISPLAY TYPE = TOPOLOGY                                            
+  IST1295I CP NAME           NODETYPE ROUTERES CONGESTION  CP-CP WEIGHT      
+  IST1296I USIBMNR.IPNETWRK  VN       *NA*     ***NA***    NO    *NA*        
+  IST1296I USIBMNR.NRMCMC1   NN       128      NONE        YES   *NA*        
+  IST1296I IBMGVRN.INTERNAL  GVRN     *NA*     ***NA***    NO    *NA*        
+  IST1296I USIBMNR.NRMCMC2   NN       128      NONE        YES   *NA*        
+  IST1296I USIBMNR.ZBMVSC    EN       *NA*     ***NA***    NO    *NA*        
+  IST1296I USIBMNR.NRMVSQ    EN       *NA*     ***NA***    NO    *NA*        
+  IST1296I USIBMNR.NRMVS2    EN       *NA*     ***NA***    NO    *NA*        
+  IST314I END                                                                
+
+
+ -RO VSK,D NET,TOPO,LIST=EN                                                
+  IST097I DISPLAY ACCEPTED                                                 
+  IST350I DISPLAY TYPE = TOPOLOGY                                          
+  IST1295I CP NAME           NODETYPE ROUTERES CONGESTION  CP-CP WEIGHT    
+  IST1296I USIBMNR.NRMVSQ    EN       *NA*     ***NA***    NO    *NA*      
+  IST1296I USIBMNR.NRMVS2    EN       *NA*     ***NA***    NO    *NA*      
+  IST1296I USIBMNR.ZBMVSC    EN       *NA*     ***NA***    NO    *NA*      
+  IST314I END                                                              
+
+-RO VSK,D NET,TOPO,LIST=NN                                              
+ IST097I DISPLAY ACCEPTED                                               
+ IST350I DISPLAY TYPE = TOPOLOGY                                        
+ IST1295I CP NAME           NODETYPE ROUTERES CONGESTION  CP-CP WEIGHT  
+ IST1296I USIBMNR.NRMVST    NN       255      NONE        NO    *NA*    
+ IST1296I USIBMNR.NRMVS5    NN       128      NONE        NO    *NA*    
+ IST1296I USIBMNR.NRMVSK    NN       128      NONE        *NA*  *NA*    
+ IST1296I USIBMNR.NRMCMC1   NN       128      NONE        YES   *NA*    
+ IST1296I USIBMNR.NRMMVSD   NN       128      NONE        NO    *NA*    
+ IST1296I USIBMNR.NRMVS6    NN       128      NONE        NO    *NA*    
+ IST1296I USIBMNR.NRMCMC2   NN       128      NONE        YES   *NA*    
+ IST1296I USIBMNR.NRMMVSF   NN       128      NONE        NO    *NA*    
+ IST314I END                                                            
+
+-RO VSK,D NET,TOPO,ORIG=NRMVSK,DEST=USIBMNR.NRMMVSD,APPNCOS=ÑBATCH       
+ IST097I DISPLAY ACCEPTED                                                
+ IST350I DISPLAY TYPE = TOPOLOGY                                         
+ IST1299I TRANSMISSION GROUPS ORIGINATING AT CP USIBMNR.NRMVSK           
+ IST1357I                                                 CPCP           
+ IST1300I DESTINATION CP    TGN      STATUS   TGTYPE      VALUE WEIGHT   
+ IST1301I USIBMNR.NRMMVSD   3        INOP     INTERM      YES   32767    
+ IST1579I                   ------------------------------------------   
+ IST2241I                                                 TIME  ISL      
+ IST1163I                   RSN               HPR         LEFT  WEIGHT   
+ IST1164I                   6343602           YES         11    *NA*     
+ IST1579I                   ------------------------------------------   
+ IST1302I                   CAPACITY PDELAY   COSTTIME    COSTBYTE       
+ IST1303I                   197M     NEGLIGIB 0           0              
+ IST1579I                   ------------------------------------------   
+ IST1304I                   SECURITY UPARM1   UPARM2      UPARM3         
+ IST1305I                   SECURE   128      128         128            
+ IST924I -------------------------------------------------------------   
+
+
+-RO VSK,D NET,TOPO,LIST=CDSERVR                                           
+ IST097I DISPLAY ACCEPTED                                                 
+ IST350I DISPLAY TYPE = TOPOLOGY                                          
+ IST1295I CP NAME           NODETYPE ROUTERES CONGESTION  CP-CP WEIGHT    
+ IST1296I USIBMNR.NRMCMC1   NN       128      NONE        YES   *NA*      
+ IST1296I USIBMNR.NRMCMC2   NN       128      NONE        YES   *NA*      
+ IST314I END                                                              
+
+
+d net,topo,list=tduinfo
+
+d net,topo,list=tdudiag,orig=cdq6,dest=ibmfocal.b2,tgn=21
+
+F procname,TOPO,FUNCTION=DELETE,ORIG=NRMVSK,DEST=NRMVSD,TGN=3
+
+F procname,TOPO,FUNCTION=DELETE,ORIG=NRMVSK,DEST=NRMVSD,TGN=3
+
+-----------------------------------------------------------------------------
+
+-D NET,ADJCLUST                
+
+el dsme para lo que mas sirve es para la parte no calificada
+                                    
+ IST097I DISPLAY ACCEPTED                                          
+ IST350I DISPLAY TYPE = ADJACENT CLUSTER TABLE                     
+ IST2207I DEFINED TABLE FOR DEFAULT_NETID                          
+ IST2209I BNDYN = LIMITED FROM ADJCLUST TABLE                      
+ IST2208I BNORD = DEFINED FROM START OPTION                        
+ IST1326I CP NAME           TYPE    STATE      STATUS       SNVC   
+ IST1327I USIBMP0.P0NCDRM   DEFINED ACTIVE     *** N/A ***  N/A    
+ IST1327I NETBH.HOSTNAG4    DEFINED ACTIVE     NOT SEARCHED 003    
+ IST1327I USIBMP0.P08CDRM   DEFINED ACTIVE     NOT SEARCHED 003    
+ IST1327I USIBMP0.MGY04MG   DEFINED ACTIVE     NOT SEARCHED 003    
+ IST1327I ARIBMHA1.HAAYMVS1 DYNAMIC ACTIVE     NOT SEARCHED 003    
+ IST1327I AUIBMQA1.QASA01   DYNAMIC ACTIVE     NOT SEARCHED 003    
+ IST1327I AUIBMQA1.QASA140  DYNAMIC ACTIVE     NOT SEARCHED 003    
+ IST1327I BRIGN005.HCM7Y    DYNAMIC ACTIVE     NOT SEARCHED 003    
+ IST1327I BRIGN005.V08FP    DYNAMIC ACTIVE     NOT SEARCHED 003    
+ IST1327I CAIBMBMT.OP1      DYNAMIC ACTIVE     NOT SEARCHED 003    
+ IST1327I CAIBMBMT.OP2      DYNAMIC ACTIVE     NOT SEARCHED 003    
+ IST1327I CAIBMOML.OEZ      DYNAMIC ACTIVE     NOT SEARCHED 003    
+
+
+---------------------------
+
+/d omvs,u=TCP
+
+/d omvs,limits            limites de stc que levantan por ejemplo el iked nos llego a 500 IPCMSGNIDS
+
+
+
