@@ -1,0 +1,50 @@
+
+RACDCERT site LISTCHAIN (LABEL('Cert for RALVS6'))
+
+
+
+RACDCERT LISTRING(*) ID(TCPIP)
+
+RACDCERT CERTAUTH LIST(LABEL('IBMCA Inter Jan 2016') 
+
+RACDCERT CERTAUTH LIST(LABEL('IBM Root CA')
+
+RACDCERT CERTAUTH LIST(LABEL('IBM Internal Intermediate CA')
+
+
+
+racdcert SITE list(LABEL('SYS8 cert for File Transfer')
+
+racdcert SITE list(LABEL('2048 bit cert L1@@ TCP')
+
+
+2048 bit cert NAG1 TCP 
+
+racdcert SITE list(LABEL('2048 bit cert NAG1 TCP')
+
+
+IBM Internal Intermediate
+
+RACDCERT CERTAUTH LIST(LABEL('IBM Internal Intermediate')
+
+RACDCERT CERTAUTH LIST(LABEL('IBM Internal Root')
+
+IBM Root CA
+
+RACDCERT CERTAUTH LIST(LABEL('IBM Root CA')
+
+
+ROOT VERISIGN 
+
+
+RACDCERT CERTAUTH LIST(LABEL('LABEL00000001')
+
+
+---
+
+racdcert SITE list(LABEL('2048 bit cert UNS5 TCP')
+
+RACDCERT CERTAUTH LIST(LABEL('IBMCAPKI Intermediate CA')
+
+RACDCERT CERTAUTH LIST(LABEL('IBMCAPKI Root CA')
+
