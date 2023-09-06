@@ -1,0 +1,209 @@
+
+acf
+chkcert ftpcert.epplex
+
+racdcert id(ftpcert) listring(*)
+
+racdcert site listchain (label('ftp secure')) id(ftpcert)
+
+
+TSO ACF
+
+
+SET PROF(USER) DIV(CERTDATA)
+
+
+L LIKE(-)
+
+
+SET PROF(USER) DIV(KEYRING)
+
+
+L LIKE(-)
+
+chkcert certauth.digroot
+
+
+tso acf
+
+set profile(user) div(certdata)
+
+list like(ftpcert-)
+
+
+ver personal antes
+chkcert NDM.S6S7 chain
+
+
+-------------------------------------
+
+CLIENT SENT ME 3 certificates to import in the keyring of ndm and i will check if there are already exist:
+
+
+-----BEGIN CERTIFICATE-----                                     
+MIIDjjCCAnagAwIBAgIQAzrx5qcRqaC7KGSxHQn65TANBgkqhkiG9w0BAQsFADBh
+MQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMRkwFwYDVQQLExB3
+d3cuZGlnaWNlcnQuY29tMSAwHgYDVQQDExdEaWdpQ2VydCBHbG9iYWwgUm9vdCBH
+MjAeFw0xMzA4MDExMjAwMDBaFw0zODAxMTUxMjAwMDBaMGExCzAJBgNVBAYTAlVT
+MRUwEwYDVQQKEwxEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdpY2VydC5j
+b20xIDAeBgNVBAMTF0RpZ2lDZXJ0IEdsb2JhbCBSb290IEcyMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuzfNNNx7a8myaJCtSnX/RrohCgiN9RlUyfuI
+2/Ou8jqJkTx65qsGGmvPrC3oXgkkRLpimn7Wo6h+4FR1IAWsULecYxpsMNzaHxmx
+1x7e/dfgy5SDN67sH0NO3Xss0r0upS/kqbitOtSZpLYl6ZtrAGCSYP9PIUkY92eQ
+q2EGnI/yuum06ZIya7XzV+hdG82MHauVBJVJ8zUtluNJbd134/tJS7SsVQepj5Wz
+tCO7TG1F8PapspUwtP1MVYwnSlcUfIKdzXOS0xZKBgyMUNGPHgm+F6HmIcr9g+UQ
+vIOlCsRnKPZzFBQ9RnbDhxSJITRNrw9FDKZJobq7nMWxM4MphQIDAQABo0IwQDAP
+BgNVHRMBAf8EBTADAQH/MA4GA1UdDwEB/wQEAwIBhjAdBgNVHQ4EFgQUTiJUIBiV
+5uNu5g/6+rkS7QYXjzkwDQYJKoZIhvcNAQELBQADggEBAGBnKJRvDkhj6zHd6mcY
+1Yl9PMWLSn/pvtsrF9+wX3N3KjITOYFnQoQj8kVnNeyIv/iPsGEMNKSuIEyExtv4
+NeF22d+mQrvHRAiGfzZ0JFrabA0UWTW98kndth/Jsw1HKj2ZL7tcu7XUIOGZX1NG
+Fdtom/DzMNU+MeKNhJ7jitralj41E6Vf8PlwUHBHQRFXGU7Aj64GxJUTFy8bJZ91
+8rGOmaFvE7FBcf6IKshPECBV1/MUReXgRPTqh5Uykw7+U0b6LJ3/iyK5S9kJRaTe
+pLiaWN0bfVKfjllDiIGknibVb63dDcY3fe0Dkhvld1927jyNxF1WW6LZZm6zNTfl
+MrY=                                                            
+-----END CERTIFICATE-----     
+
+
+SO I INCLUDE ALL OF THAT INFO IN A DATASET CALLED O791109.CHECK.CERT.DSN in utplex WITH THIS ATTR: 
+
+Organization  . . . : PS     
+Record format . . . : VBA    
+Record length . . . : 240    
+Block size  . . . . : 27998  
+
+
+TSO ACF
+
+CHKCERT DSN('O791109.CHECK.CERT.DSN') 
+
+
+Label:                                  
+    Digicert 2013 Root                  
+Serial number:                          
+    033AF1E6A711A9A0BB2864B11D09FAE5    
+Issuer's distinguished name:            
+    CN=DigiCert Global Root G2          
+    OU=www.digicert.com                 
+    O=DigiCert Inc                      
+    C=US                                
+Subject's distinguished name:           
+    CN=DigiCert Global Root G2          
+    OU=www.digicert.com                 
+    O=DigiCert Inc                      
+    C=US                                
+                                        
+Key Usage:                              
+    digitalSignature CERTSIGN           
+                                        
+Not valid before:                       
+    2013/08/01  12:00:00 UTC            
+Not valid after:                        
+    2038/01/15  12:00:00 UTC     
+Public Key Type:                                     
+    RSA                                              
+Public key bit size:                                 
+    2048                                             
+Signature Algorithm:                                 
+    sha256WithRSAEncryption                          
+                                                     
+Certificate Fingerprint(SHA256):                     
+    CB:3C:CB:B7:60:31:E5:E0:13:8F:8D:D3:9A:23:F9:DE: 
+    47:FF:C3:5E:43:C1:14:4C:EA:27:D4:6A:5A:B1:CB:5F  
+                                                     
+This certificate is registered with CA ACF2          
+                                                     
+The CERTDATA record key is CERTAUTH.DIGI2013         
+
+
+--
+
+
+
+   the intermediate:
+
+Serial number:                          
+    01678F1FEF882255D8B0A70E6B7BB220    
+Issuer's distinguished name:            
+    CN=DigiCert Global Root G2          
+    OU=www.digicert.com                 
+    O=DigiCert Inc                      
+    C=US                                
+Subject's distinguished name:           
+    CN=DigiCert EV RSA CA G2            
+    O=DigiCert Inc                      
+    C=US                                
+                                        
+Key Usage:                              
+    digitalSignature CERTSIGN           
+                                        
+Not valid before:                       
+    2020/07/02  12:42:50 UTC            
+Not valid after:                        
+    2030/07/02  12:42:50 UTC            
+                                        
+Public Key Type:                        
+    RSA                                     
+Public key bit size:                                   
+    2048                                               
+Signature Algorithm:                                   
+    sha256WithRSAEncryption                            
+                                                       
+Certificate Fingerprint(SHA256):                       
+    95:88:EF:74:19:9E:45:AC:EF:CC:CF:C0:C4:70:10:E9:   
+    F2:A3:7A:1D:D4:4C:61:A4:E1:C6:B3:34:DA:5A:F6:14    
+
+
+---
+
+public
+
+Serial number:                          
+    0AFB893DCE210B015715F514BB3AA818    
+Issuer's distinguished name:            
+    CN=DigiCert EV RSA CA G2            
+    O=DigiCert Inc                      
+    C=US                                
+Subject's distinguished name:           
+    CN=ndm.dstsystems.com               
+    O=SS&C Technologies, Inc.           
+    L=Windsor                           
+    ST=Connecticut                      
+    C=US                                
+    serialNumber=2607209                
+    BC=Private Organization             
+    joiST=Delaware                      
+    joiC=US                             
+                                        
+Subject's AltNames:                     
+    Domain: ndm.dstsystems.com          
+                                        
+Key Usage:                              
+    HANDSHAKE                           
+Not valid before:                                       
+    2023/08/25  00:00:00 UTC                            
+Not valid after:                                        
+    2024/09/24  23:59:59 UTC                            
+                                                        
+Public Key Type:                                        
+    RSA                                                 
+Public key bit size:                                    
+    2048                                                
+Signature Algorithm:                                    
+    sha256WithRSAEncryption                             
+                                                        
+Certificate Fingerprint(SHA256):                        
+    94:5B:51:CA:59:C2:91:16:5D:62:77:45:E3:11:37:92:    
+    D1:FC:D1:BB:2F:6C:06:78:22:05:3A:DB:8E:EF:D6:52     
+
+
+
+** THE LAST ONE SAY KEY USAGE : HANDSHAKE SO THAT SEEMS TO BE THE PERSONAL OR SITE, SO I DONT NEED TO LOAD THAT
+
+
+root is in there
+
+
+033AF1E6A711A9A0BB2864B11D09FAE5 
+033AF1E6A711A9A0BB2864B11D09FAE5
+
+
